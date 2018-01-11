@@ -73,10 +73,9 @@ public class DiceRollControll : MonoBehaviour
 
         if (rollCount != 0) return;
 
-        foreach (PlayerDicesUI playerDices in playerDicesUIs)
-        {
-            playerDices.DisplayPipsSum();
-        }
+        playerDicesUIs[0].DisplayPipsSum(playerDicesUIs[0].PipsSum > playerDicesUIs[1].PipsSum);
+        playerDicesUIs[1].DisplayPipsSum(playerDicesUIs[0].PipsSum < playerDicesUIs[1].PipsSum);
+
         InitPramatar();
     }
 	

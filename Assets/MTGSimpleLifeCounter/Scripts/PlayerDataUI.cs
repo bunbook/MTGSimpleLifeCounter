@@ -23,6 +23,14 @@ public class PlayerDataUI : MonoBehaviour
     {
         set
         {
+            if (value > 5)
+            {
+                lifeCountText.color = new Color(100f/255, 255f/255, 100f/255, 1f);
+            }
+            else
+            {
+                lifeCountText.color = new Color(255f/255, 100f/255, 100f/255, 1f);
+            }
             lifeCountText.text = value.ToString();
         }
     }

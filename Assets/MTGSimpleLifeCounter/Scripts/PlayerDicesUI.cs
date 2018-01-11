@@ -21,6 +21,14 @@ public class PlayerDicesUI : MonoBehaviour
 
     #region プロパティ
 
+    public int PipsSum
+    {
+        get
+        {
+            return diceUIs.Select(x => x.dice.PipNum).Sum();
+        }
+    }
+
     #endregion
 
 
@@ -78,9 +86,18 @@ public class PlayerDicesUI : MonoBehaviour
         }
     }
 
-    public void DisplayPipsSum()
+    public void DisplayPipsSum(bool winColor)
     {
-        dicePipsSumText.text = diceUIs.Select(x => x.dice.PipNum).Sum().ToString();
+        if (winColor)
+        {
+            dicePipsSumText.color = new Color(255f/255, 255f/255, 100f/255, 1f);
+        }
+        else
+        {
+            dicePipsSumText.color = new Color(1f, 1f, 1f, 1f);
+        }
+
+        dicePipsSumText.text = PipsSum.ToString();
     }
 
 	#endregion

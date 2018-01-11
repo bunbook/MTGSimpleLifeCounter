@@ -13,6 +13,8 @@ public class UIController : MonoBehaviour
     #region フィールド
 
     private GameObject playerDataUIPrefab;
+    private GameObject playerDataUILeftPrefab;
+    private GameObject playerDataUIRightPrefab;
 
     private List<PlayerDataUI> playerDataUIs;
     private List<PlayerData> playerDatas;
@@ -61,9 +63,14 @@ public class UIController : MonoBehaviour
         screen = GameObject.Find("Canvas/Screen").transform;
 
         playerDataUIPrefab = (GameObject)Resources.Load("Prefabs/PlayerDataUI");
+        playerDataUILeftPrefab = (GameObject)Resources.Load("Prefabs/PlayerDataUILeft");
+        playerDataUIRightPrefab = (GameObject)Resources.Load("Prefabs/PlayerDataUIRight");
 
         // playerDataUIs = Enumerable.Repeat(Instantiate(playerDataUIPrefab).GetComponent<PlayerDataUI>(), Define.PlayerNum).ToList();
-        playerDataUIs = Enumerable.Range(0, Define.PlayerNum).Select(x => Instantiate(playerDataUIPrefab).GetComponent<PlayerDataUI>()).ToList();
+        // playerDataUIs = Enumerable.Range(0, Define.PlayerNum).Select(x => Instantiate(playerDataUIPrefab).GetComponent<PlayerDataUI>()).ToList();
+        playerDataUIs = new List<PlayerDataUI>();
+        playerDataUIs.Add(Instantiate(playerDataUILeftPrefab).GetComponent<PlayerDataUI>());
+        playerDataUIs.Add(Instantiate(playerDataUIRightPrefab).GetComponent<PlayerDataUI>());
 
         playerDatas = Enumerable.Range(0, Define.PlayerNum).Select(x => new PlayerData(this.playerDataUIs[x])).ToList();
 
