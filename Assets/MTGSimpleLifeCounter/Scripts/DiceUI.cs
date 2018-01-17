@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using MTGSimpleLifeCounter;
 
@@ -16,7 +14,7 @@ public class DiceUI : MonoBehaviour
 
 	#region プロパティ
 	
-    public Dice dice { get; private set; }
+    public Dice Dice { get; private set; }
 
     public Define.DicePipType PipNum
     {
@@ -45,29 +43,13 @@ public class DiceUI : MonoBehaviour
 	void Awake ()
 	{
         pipNumText = transform.Find("Text").GetComponent<Text>();
-        dice = new Dice(this);
-	}
-	
-	/// <summary> 
-	/// 更新前処理
-	/// </summary>
-	void Start () 
-	{
-		
-	}
-	
-	/// <summary> 
-	/// 更新処理
-	/// </summary>
-	void Update () 
-	{
-        
+        Dice = new Dice(this);
 	}
 
     #endregion
 
 
-    #region メソッド
+    #region public メソッド
 
     public void Init(Vector2 anchor, Vector2 position, Transform parent)
     {
@@ -79,7 +61,8 @@ public class DiceUI : MonoBehaviour
 
     public void Roll()
     {
-        dice.PipNum = (Random.Range(0, (int)Define.DicePipType.Five + (int)Define.DicePipType.Six * 166) % (int)Define.DicePipType.Six) + (int)Define.DicePipType.One;
+        // Random.range(0 , 5 + 6 * 166) % 6 + 1
+        Dice.PipNum = (Random.Range(0, (int)Define.DicePipType.Five + (int)Define.DicePipType.Six * 166) % (int)Define.DicePipType.Six) + (int)Define.DicePipType.One;
     }
 
     #endregion

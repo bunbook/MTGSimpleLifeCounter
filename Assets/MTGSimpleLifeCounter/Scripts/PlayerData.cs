@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using MTGSimpleLifeCounter;
 
 public class PlayerData
@@ -10,7 +8,6 @@ public class PlayerData
 
     private int _lifeCount;
     private int _poisonCount;
-
     private PlayerDataUI _playerDataUI;
 
 	#endregion
@@ -27,9 +24,9 @@ public class PlayerData
         set
         {
             _lifeCount = value;
-            if (_lifeCount < Define.minLifeCount)
+            if (_lifeCount < Define.MinLifeCount)
             {
-                _lifeCount = Define.minLifeCount;
+                _lifeCount = Define.MinLifeCount;
             }
             _playerDataUI.LifeCount = _lifeCount;
         }
@@ -44,19 +41,17 @@ public class PlayerData
         set
         {
             _poisonCount = value;
-            if (_poisonCount < Define.minPoisonCount)
+            if (_poisonCount < Define.MinPoisonCount)
             {
-                _poisonCount = Define.minPoisonCount;
+                _poisonCount = Define.MinPoisonCount;
             }
-            if (_poisonCount > Define.maxPoisonCount)
+            if (_poisonCount > Define.MaxPoisonCount)
             {
-                _poisonCount = Define.maxPoisonCount;
+                _poisonCount = Define.MaxPoisonCount;
             }
             _playerDataUI.PoisonCount = _poisonCount;
         }
     }
-
-    public PlayerDataUI PlayerDataUI { get; set; }
 
     #endregion
 
@@ -66,22 +61,28 @@ public class PlayerData
     public PlayerData(PlayerDataUI playerDataUI)
     {
         _playerDataUI = playerDataUI;
-        InitParameter();
+        Init();
     }
 
     #endregion
 
 
-    #region メソッド
+    #region public メソッド
 
-    public void InitParameter()
+    public void Init()
     {
-        LifeCount = Define.initialLifeCount;
-        PoisonCount = Define.minPoisonCount;
+        LifeCount = Define.InitialLifeCount;
+        PoisonCount = Define.MinPoisonCount;
     }
 
     public void AddLifeCount(int addValue)
     {
+        if (LifeCount >= int.MaxValue - Mathf.Abs(addValue))
+        {
+            // int最大値考慮
+            LifeCount = int.MaxValue;
+            return;
+        }
         LifeCount += addValue;
     }
 

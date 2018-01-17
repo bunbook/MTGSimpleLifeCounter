@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using MTGSimpleLifeCounter;
 
 public class Dice
@@ -9,7 +7,6 @@ public class Dice
     #region フィールド
 
     private DiceUI diceUI;
-
     private Define.DicePipType _pipNum;
 
     #endregion
@@ -25,7 +22,7 @@ public class Dice
         }
         set
         {
-            if (value < 1 || 6 < value) return;
+            if (value < (int)Define.DicePipType.One || (int)Define.DicePipType.Six < value) return;
             _pipNum = (Define.DicePipType)Enum.ToObject(typeof(Define.DicePipType), value);
             diceUI.PipNum = _pipNum;
         }
@@ -39,18 +36,9 @@ public class Dice
     public Dice(DiceUI diceUI)
     {
         this.diceUI = diceUI;
-        Init();
-    }
-
-    #endregion
-
-	#region メソッド
-	
-    public void Init()
-    {
         PipNum = (int)Define.DicePipType.One;
     }
 
-	#endregion
+    #endregion
 
 }

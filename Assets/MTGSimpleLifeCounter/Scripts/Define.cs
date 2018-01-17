@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
+﻿
 namespace MTGSimpleLifeCounter
 {
     public static class Define
@@ -8,20 +6,18 @@ namespace MTGSimpleLifeCounter
 
         #region 定数
 
-        public const float ScreenWidth = 1600;
-        public const float ScreenHeight = 1200;
-
-        // public const int SmallScreenWidth = 1600;
-        // public const int SmallScreenHeight = 1200;
-
+        // 結局使ってないが一応残しておく
+        public const float ScreenWidth = 1280;
+        public const float ScreenHeight = 800;
+        
         public const int PlayerNum = 2;
         public const int PlayerDiceNum = 2;
         
-        public const int initialLifeCount = 20;
-        public const int minLifeCount = 0;
+        public const int InitialLifeCount = 20;
+        public const int MinLifeCount = 0;
 
-        public const int minPoisonCount = 0;
-        public const int maxPoisonCount = 10;
+        public const int MinPoisonCount = 0;
+        public const int MaxPoisonCount = 10;
 
         #endregion
 
@@ -39,20 +35,8 @@ namespace MTGSimpleLifeCounter
 
         #endregion
 
-        #region プロパティ
 
-        public static float ScreenAspectRatio
-        {
-            get
-            {
-                return ScreenWidth / ScreenHeight;
-            }
-        }
-
-        #endregion
-
-
-        #region メソッド
+        #region public static メソッド
 
         public static string ToStr(this DicePipType dicePipType)
         {
@@ -60,7 +44,7 @@ namespace MTGSimpleLifeCounter
             switch (dicePipType)
             {
                 case DicePipType.One:
-                    str = "Φ"; // "Φ"; "●";
+                    str = "Φ";
                     break;
                 case DicePipType.Two:
                     str = "● 　 　\n"

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,9 +10,7 @@ public class PlayerDicesUI : MonoBehaviour
     #region フィールド
 
     private Text dicePipsSumText;
-
     private GameObject diceUIPrefab;
-
     private List<DiceUI> diceUIs;
 
     #endregion
@@ -25,7 +22,7 @@ public class PlayerDicesUI : MonoBehaviour
     {
         get
         {
-            return diceUIs.Select(x => x.dice.PipNum).Sum();
+            return diceUIs.Select(x => x.Dice.PipNum).Sum();
         }
     }
 
@@ -45,30 +42,14 @@ public class PlayerDicesUI : MonoBehaviour
         diceUIPrefab = (GameObject)Resources.Load("Prefabs/DiceUI");
 
         diceUIs = Enumerable.Range(0, Define.PlayerDiceNum).Select(x => Instantiate(diceUIPrefab).GetComponent<DiceUI>()).ToList();
-        diceUIs[0].Init(new Vector2(0.5f, 0.5f), new Vector2(95, -95), this.transform);
-        diceUIs[1].Init(new Vector2(0.5f, 0.5f), new Vector2(-95, -95), this.transform);
+        diceUIs[0].Init(new Vector2(0.5f, 0.5f), new Vector2(95, -110), this.transform);
+        diceUIs[1].Init(new Vector2(0.5f, 0.5f), new Vector2(-95, -110), this.transform);
     }
-
-    /// <summary> 
-    /// 更新前処理
-    /// </summary>
-    void Start () 
-	{
-		
-	}
-	
-	/// <summary> 
-	/// 更新処理
-	/// </summary>
-	void Update () 
-	{
-		
-	}
 
     #endregion
 
 
-    #region メソッド
+    #region public メソッド
 
     public void Init(Vector2 anchor, Vector2 position, Transform parent)
     {
@@ -96,7 +77,6 @@ public class PlayerDicesUI : MonoBehaviour
         {
             dicePipsSumText.color = new Color(1f, 1f, 1f, 1f);
         }
-
         dicePipsSumText.text = PipsSum.ToString();
     }
 

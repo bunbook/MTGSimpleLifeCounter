@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -14,6 +12,14 @@ public class PlayerDataUI : MonoBehaviour
     private Text lifeCountText;
     private Text poisonCountText;
 
+    private Button lifeCountPlusOneButton;
+    private Button lifeCountMinusOneButton;
+    private Button lifeCountPlusFiveButton;
+    private Button lifeCountMinusFiveButton;
+
+    private Button poisonCountPlusOneButton;
+    private Button poisonCountMinusOneButton;
+
     #endregion
 
 
@@ -25,11 +31,16 @@ public class PlayerDataUI : MonoBehaviour
         {
             if (value > 5)
             {
-                lifeCountText.color = new Color(100f/255, 255f/255, 100f/255, 1f);
+                lifeCountText.color = new Color(100f/255, 255f/255, 125f/255, 1f);
             }
             else
             {
                 lifeCountText.color = new Color(255f/255, 100f/255, 100f/255, 1f);
+            }
+            if (value == int.MaxValue)
+            {
+                lifeCountText.text = "∞";
+                return;
             }
             lifeCountText.text = value.ToString();
         }
@@ -42,15 +53,7 @@ public class PlayerDataUI : MonoBehaviour
             poisonCountText.text = value.ToString();
         }
     }
-
-    public Button LifeCountPlusOneButton { get; private set; }
-    public Button LifeCountMinusOneButton { get; private set; }
-    public Button LifeCountPlusFiveButton { get; private set; }
-    public Button LifeCountMinusFiveButton { get; private set; }
-
-    public Button PoisonCountPlusOneButton { get; private set; }
-    public Button PoisonCountMinusOneButton { get; private set; }
-
+    
     #endregion
 
 
@@ -64,35 +67,20 @@ public class PlayerDataUI : MonoBehaviour
         lifeCountText = transform.Find("LifeCount/Text").GetComponent<Text>();
         poisonCountText = transform.Find("PoisonCount/Text").GetComponent<Text>();
 
-        LifeCountPlusOneButton = transform.Find("LifeCount/Button/PlusOne").GetComponent<Button>();
-        LifeCountPlusFiveButton = transform.Find("LifeCount/Button/PlusFive").GetComponent<Button>();
+        lifeCountPlusOneButton = transform.Find("LifeCount/Button/PlusOne").GetComponent<Button>();
+        lifeCountPlusFiveButton = transform.Find("LifeCount/Button/PlusFive").GetComponent<Button>();
 
-        LifeCountMinusOneButton = transform.Find("LifeCount/Button/MinusOne").GetComponent<Button>();
-        LifeCountMinusFiveButton = transform.Find("LifeCount/Button/MinusFive").GetComponent<Button>();
+        lifeCountMinusOneButton = transform.Find("LifeCount/Button/MinusOne").GetComponent<Button>();
+        lifeCountMinusFiveButton = transform.Find("LifeCount/Button/MinusFive").GetComponent<Button>();
 
-        PoisonCountPlusOneButton = transform.Find("PoisonCount/Button/PlusOne").GetComponent<Button>();
-        PoisonCountMinusOneButton = transform.Find("PoisonCount/Button/MinusOne").GetComponent<Button>();
+        poisonCountPlusOneButton = transform.Find("PoisonCount/Button/PlusOne").GetComponent<Button>();
+        poisonCountMinusOneButton = transform.Find("PoisonCount/Button/MinusOne").GetComponent<Button>();
     }
-
-    /// <summary> 
-    /// 更新前処理
-    /// </summary>
-    void Start () 
-	{
-        
-    }
-	
-	/// <summary> 
-	/// 更新処理
-	/// </summary>
-	void Update () 
-	{
-		
-	}
 
     #endregion
 
-    #region メソッド
+
+    #region public メソッド
 
     public void Init(Vector2 anchor, Vector2 position, Transform parent, PlayerData playerData)
     {
@@ -102,13 +90,13 @@ public class PlayerDataUI : MonoBehaviour
         transform.SetParent(parent, false);
         transform.SetAsFirstSibling();
 
-        LifeCountPlusOneButton.onClick.AddListener(() => playerData.AddLifeCount(1));
-        LifeCountPlusFiveButton.onClick.AddListener(() => playerData.AddLifeCount(5));
-        LifeCountMinusOneButton.onClick.AddListener(() => playerData.AddLifeCount(-1));
-        LifeCountMinusFiveButton.onClick.AddListener(() => playerData.AddLifeCount(-5));
+        lifeCountPlusOneButton.onClick.AddListener(() => playerData.AddLifeCount(1));
+        lifeCountPlusFiveButton.onClick.AddListener(() => playerData.AddLifeCount(5));
+        lifeCountMinusOneButton.onClick.AddListener(() => playerData.AddLifeCount(-1));
+        lifeCountMinusFiveButton.onClick.AddListener(() => playerData.AddLifeCount(-5));
 
-        PoisonCountPlusOneButton.onClick.AddListener(() => playerData.AddPoisonCount(1));
-        PoisonCountMinusOneButton.onClick.AddListener(() => playerData.AddPoisonCount(-1));
+        poisonCountPlusOneButton.onClick.AddListener(() => playerData.AddPoisonCount(1));
+        poisonCountMinusOneButton.onClick.AddListener(() => playerData.AddPoisonCount(-1));
     }
 
     #endregion
