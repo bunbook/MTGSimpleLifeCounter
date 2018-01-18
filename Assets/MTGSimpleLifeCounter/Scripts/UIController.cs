@@ -50,8 +50,8 @@ public class UIController : MonoBehaviour
         playerDataUIs.Add(Instantiate(playerDataUIRightPrefab).GetComponent<PlayerDataUI>());
         playerDatas = Enumerable.Range(0, Define.PlayerNum).Select(x => new PlayerData(this.playerDataUIs[x])).ToList();
 
-        playerDataUIs[0].Init(new Vector2(0, 0.5f), new Vector2(285, 0), screen.transform, playerDatas[0]);
-        playerDataUIs[1].Init(new Vector2(1, 0.5f), new Vector2(-285, 0), screen.transform, playerDatas[1]);
+        playerDataUIs[0].Init(new Vector2(0, 0.5f), new Vector2(280, 0), screen.transform, playerDatas[0]);
+        playerDataUIs[1].Init(new Vector2(1, 0.5f), new Vector2(-280, 0), screen.transform, playerDatas[1]);
 
         // リセットボタン関連
         resetButton = screen.Find("Button/Reset").GetComponent<Button>();
