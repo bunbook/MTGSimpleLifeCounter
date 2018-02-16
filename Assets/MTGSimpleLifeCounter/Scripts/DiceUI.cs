@@ -61,8 +61,10 @@ public class DiceUI : MonoBehaviour
 
     public void Roll()
     {
-        // Random.range(0 , 5 + 6 * 166) % 6 + 1
-        Dice.PipNum = (Random.Range(0, (int)Define.DicePipType.Five + (int)Define.DicePipType.Six * 166) % (int)Define.DicePipType.Six) + (int)Define.DicePipType.One;
+        // Random.range(0 <= x < 6 * 167) % 6 + 1
+        // Random.range(0 <= x < 6) + 1 の方が良い？
+        Dice.PipNum = (Random.Range(0, (int)Define.DicePipType.Six * 167) % (int)Define.DicePipType.Six) + (int)Define.DicePipType.One;
+        // Dice.PipNum = (Random.Range(0, (int)Define.DicePipType.Six)) + (int)Define.DicePipType.One;
     }
 
     #endregion
